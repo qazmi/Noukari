@@ -1,0 +1,114 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">What We Do!!!</h1>
+    <p class="lead">The portal is designed for internal recruitment purpose more than a regular job portal.
+       It will simplify the normal paper work to shortlist candidates and interview calling. 
+       The software is featured to filter candidates, inform them for interview, shortlist candidates, store large number of resumes according to server capacity and normal job portal features like candidates can apply for jobs from front end of the portal etc.</p>
+    <p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a>
+    </p>
+    <div class="input-group" id="adv-search">
+        <input type="text" class="form-control" placeholder="Search for snippets" />
+        <div class="input-group-btn">
+            <div class="btn-group" role="group">
+                <div class="dropdown dropdown-lg">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <form class="form-horizontal" role="form">
+                          <div class="form-group">
+                            <label for="filter">Filter by</label>
+                            <select class="form-control">
+                                <option value="0" selected>All Snippets</option>
+                                <option value="1">Featured</option>
+                                <option value="2">Most popular</option>
+                                <option value="3">Top rated</option>
+                                <option value="4">Most commented</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="contain">Author</label>
+                            <input class="form-control" type="text" />
+                          </div>
+                          <div class="form-group">
+                            <label for="contain">Contains the words</label>
+                            <input class="form-control" type="text" />
+                          </div>
+                          <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </form>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </div>
+  </div>
+    
+  </div>
+  
+  <div class="container" *ngFor = "let job of Jobs">
+    <!-- Example row of columns -->
+
+
+    <div class="card text-center">
+      <div class="card-header">
+      <strong>{{job.title}}</strong>  
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"> {{job.employer}}</h5>
+        <p class="card-text">{{job.description}}</p>
+        <a href="#" class="btn btn-primary" routerLink="/login">Apply</a>
+      </div>
+      <div class="card-footer text-muted">
+       Posted - {{job.postedSince}} Expires on  {{job.expiresOn}}
+      </div>
+    </div>
+ 
+ <br>
+
+
+
+  
+
+
+  </div>
+  <!-- /container -->
+
+  <style>
+  body {
+    padding-top: 50px;
+}
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+  </style>
+ 
+    <link href="../../assets/bootstrap.min.css" rel="stylesheet" >
+    <script src="../../assets/bootstrap.min.js"></script>
+<script src="../../assets/jquery.min.js"></script>
+
+
