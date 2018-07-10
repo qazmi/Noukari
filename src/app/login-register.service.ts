@@ -15,7 +15,7 @@ export class LoginRegisterService {
   constructor(private _http:HttpClient, private router: Router) { }
 
   registerUser(user) : Observable<any> { 
-    console.log(`service get weather ${user.email},${user.pass}`);
+    console.log(`service email weather ${user.email},${user.pass}`);
    return this._http
      .post("http://localhost:3000/register",user)
     .pipe(map(data => {
@@ -25,16 +25,20 @@ export class LoginRegisterService {
     }));
    }
 
-   loginUser(email,pass) : Observable<any> { 
-    console.log(`service email pass ${email},${pass}`);
+   loginUser(user) : Observable<any> { 
+    console.log(`service email pass ${user.email},${user.password}`);
    return this._http
      .post("http://localhost:3000/login-email",{
-      email:email,
-      pass:pass
+      email:user.email,
+      password:user.password
      })
     .pipe(map(data => {
-      this.router.navigateByUrl('/');
-      return data;
+      if(data)
+      {
+        this.router.navigateByUrl('/');
+        return data;
+      }
+      
 
     }));
    }

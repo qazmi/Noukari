@@ -20,36 +20,35 @@ app.get('/', (req, res) => {
 })
 
 app.post('/login-email', (req, res) => {
-  
-  var user = new User({
-    email: req.body.email,
-    password: req.body.pass
-  });
-  
-  User.find().then((doc)=>{
+  User.findOne(
+    {
+      email: req.body.email,
+      password: req.body.password
+    }
+  ).then((doc) => {
     res.send(doc);
-  },(e)=>{
+
+  }, (e) => {
+
     res.status(400).send(e);
-  })
+  }).catch((e) => res.status(400).send(e));
 });
 
 app.post('/register', (req, res) => {
-  
+
   var user = new User({
     email: req.body.email,
     password: req.body.password,
     Name: req.body.firstName,
-    gender:req.body.gender
+    gender: req.body.gender
   });
-
-  //console.log(req.body);
-   user.save().then((doc) => {
-     console.log(doc);
-     res.send(doc);
-   }, (e) => {
-     console.log(e);
-     res.status(400).send(e);
-   })
+  user.save().then((doc) => {
+    console.log(doc);
+    res.send(doc);
+  }, (e) => {
+    console.log(e);
+    res.status(400).send(e);
+  })
 
 })
 
