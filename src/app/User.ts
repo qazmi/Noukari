@@ -4,6 +4,6 @@ export class User
     surName:string;
     email:string;
     password:string;
-    male:boolean;
-    remember:boolean;
+    gender:string;
+    
 }

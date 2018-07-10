@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {JobService} from '../job.service'
+import {LoginRegisterService} from '../login-register.service'
+import {User} from '../User'
 
 
 @Component({
@@ -9,13 +10,18 @@ import {JobService} from '../job.service'
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private dataservice:JobService) { }
-
+  constructor(private loginService:LoginRegisterService) { }
+ user: User;
   ngOnInit() {
+    this.user = new User();
+    this.user.gender = "Male";
   }
   registerUser()
   {
-    //this.dataservice.registerUser(this.user);
+    console.log(this.user.email,this.user.password,this.user.firstName,this.user.gender);
+     this.loginService.registerUser(this.user).subscribe((results)=>{
+       console.log('Results',results);
+     })
 
   }
 

@@ -1,99 +1,62 @@
-const express = require("express");
-const app = express();
-const bodyparser = require("body-parser");
-const json = bodyparser.json;
-const http = require('http').Server(app);
-const urlencoded = bodyparser.urlencoded;
+const express = require('express');
+var bodyParser = require("body-parser");
 const path = require("path");
-const MongoClient = require('mongodb').MongoClient;
-app.use(json());
-const url = 'mongodb://localhost:27017';
-app.use(urlencoded({
-    extended: true
-}));
-app.use(express.static(__dirname + '/../dist/Noukari'));
 
-/*
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
-});*/
-var bodyParser = require('body-parser');
+
+const { mongoose } = require('./Database/mongosse')
+var { User } = require('./Models/User')
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-http.listen(3000, function() {
-  console.log(`App started on port 3000`)
-})
+app.use(express.static(__dirname + '/../dist/Noukari'));
 
 
 
 app.get('/', (req, res) => {
 
-  //MongoClient.connect(url, (err, client) => {
- //   if (err) return console.log('error occured')
- //   var db = client.db('Noukari') // whatever your database name is
-
-  //  db.collection('Jobs').find().toArray(function(err, results) {
-  //    console.log(' sent')
-      // send HTML file populated with quotes here
-  //  })  
-//})
-res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
+  res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
 })
 
+app.post('/login-email', (req, res) => {
+  
+  var user = new User({
+    email: req.body.email,
+    password: req.body.pass
+  });
+  
+  User.find().then((doc)=>{
+    res.send(doc);
+  },(e)=>{
+    res.status(400).send(e);
+  })
+});
 
-let response = {
-  message:null,
-  status :200,
-  data:[]
-
-}
-
-var sendError = (err,res)=>{
-  response.status = 501;
-  response.message = typeof err == "object" ? err.message : err
-  //res.status(501).json.(response)
-
-  res.status(501).json(response)
-}
-
-app.get('/profile', (req, res) => {
-
-  MongoClient.connect(url, (err, client) => {
-    if (err) return console.log('error occured')
-    var db = client.db('Noukari') // whatever your database name is
-
-    db.collection('Jobs').find().toArray(function(err, results) {
-     if(err)
-     console.log(err);
-     //response.data = results;
-     res.json(results);
-    // console.log(response);
-    })  
-})
-
-})
-
-/*
-app.get('/login', (req, res) => {
-
-  MongoClient.connect(url, (err, client) => {
-    if (err) return console.log('error occured')
-    var db = client.db('Noukari') // whatever your database name is
-
-    db.collection('Users').find().toArray(function(err, results) {
-     if(err)
-     console.log(err);
-     res.json(results);
-    })  
-})
-
-})
-*/
 app.post('/register', (req, res) => {
-  console.log('req.body')
- db.collection('User').save(req.body, (err, result) => {
-   if (err) return console.log(err)
+  
+  var user = new User({
+    email: req.body.email,
+    password: req.body.password,
+    Name: req.body.firstName,
+    gender:req.body.gender
+  });
 
-   console.log('saved to database')
-   res.redirect('/')
- })
+  //console.log(req.body);
+   user.save().then((doc) => {
+     console.log(doc);
+     res.send(doc);
+   }, (e) => {
+     console.log(e);
+     res.status(400).send(e);
+   })
+
 })
+
+app.listen(3000, () => {
+  console.log('Server Listening');
+})
+
+
+
+

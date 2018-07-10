@@ -19,6 +19,8 @@ import {AuthService} from './auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginEmailComponent } from './login-email/login-email.component';
 
+import {LoginRegisterService} from './login-register.service'
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCtVMi5vcDNZMHenOhm_7Px0YR90pl1oGE",
     authDomain: "myauth-e8da6.firebaseapp.com",
@@ -51,7 +53,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,LoginRegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
