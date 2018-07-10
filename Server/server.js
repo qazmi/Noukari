@@ -5,6 +5,7 @@ const path = require("path");
 
 const { mongoose } = require('./Database/mongosse')
 var { User } = require('./Models/User')
+var { Job } = require('./Models/Job')
 
 const app = express();
 
@@ -49,7 +50,14 @@ app.post('/register', (req, res) => {
     console.log(e);
     res.status(400).send(e);
   })
+})
 
+app.post('/dashboard',(req,res)=>{
+
+  console.log(req.body);
+  Job.find({title: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docs)=>{
+    res.send(docs);
+  },(e)=> console.log(e));
 })
 
 app.listen(3000, () => {

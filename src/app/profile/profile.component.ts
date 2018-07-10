@@ -13,18 +13,11 @@ import {JobService} from '../job.service'
 export class ProfileComponent implements OnInit {
 
   constructor(private dataservice:JobService) { }
-  Jobs:JobDetails[]
   
   ngOnInit() {
-    this.getJobs();
-  }
-  getJobs(): void {
-    this.dataservice.getJobs()
-    .subscribe(jobs => {
-      this.Jobs = jobs;
     
-    });
   }
+
 
    
   

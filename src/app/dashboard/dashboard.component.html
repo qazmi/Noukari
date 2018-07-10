@@ -1,3 +1,30 @@
-<form class="form-inline my-2 my-lg-0">
-  <button (click)  = "Logout()" class="btn btn-outline-success my-2 my-sm-0"  type="button">Logout</button>
-</form>
+<div class="container">
+  <div class="input-group mb-3">
+    <input class="form-control" [(ngModel)]="searchText" name="searchText" type="search" placeholder="Search Jobs Here" aria-label="Search">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" (click)="onSearch()" type="submit">Search</button>
+    </div>
+  </div>
+  <div  *ngFor="let job of Jobs">
+    <!-- Example row of columns -->
+
+    <div class="card text-center">
+      <div class="card-header">
+        <strong>{{job.title}}</strong>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"> {{job.employer}}</h5>
+        <p class="card-text">{{job.description}}</p>
+
+        <a href="#" class="btn btn-primary" routerLink="/login">Apply</a>
+      </div>
+      <div class="card-footer text-muted">
+        Posted - {{job.postedSince}} Expires on {{job.expiresOn}}
+      </div>
+    </div>
+
+    <br>
+
+  </div>
+</div>
+<!-- /container -->

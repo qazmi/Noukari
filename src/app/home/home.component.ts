@@ -18,5 +18,15 @@ export class HomeComponent implements OnInit {
    
   }
 
+  // Logout()
+  // {
+  //   if ( this.authService.isLoggedIn )
+  //   {
+  //     this.authService.logout();
+  //     console.log('logged out');
+  //   }
+  //   this.router.navigateByUrl('/login');
+  // }
+
 }
 
