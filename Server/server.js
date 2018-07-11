@@ -55,8 +55,19 @@ app.post('/register', (req, res) => {
 app.post('/dashboard',(req,res)=>{
 
   console.log(req.body);
-  Job.find({title: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docs)=>{
-    res.send(docs);
+  Job.find({title: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docsbyJobTitle)=>{
+    console.log(docsbyJobTitle);
+    if(docsbyJobTitle.length == 0)
+    {
+      Job.find({employer: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docbyemployer)=>{
+        res.send(docbyemployer);
+      },(e)=>{console.log(e)});
+    }
+    else
+    {
+      res.send(docsbyJobTitle);
+    }
+    
   },(e)=> console.log(e));
 })
 
