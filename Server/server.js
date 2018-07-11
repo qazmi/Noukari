@@ -20,22 +20,25 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
 })
 
-app.post('/login-email', (req, res) => {
-  User.findOne(
-    {
+app.post('/login-email', async (req, res) => {
+  
+  var credentials =  await User.findOne({
       email: req.body.email,
       password: req.body.password
     }
-  ).then((doc) => {
-    res.send(doc);
+  );
+  if(credentials)
+  {
+    res.send(credentials);
+  }
+  else
+  {
+    res.status(400).send(new Error('User doesnot exsist'));
+  }
 
-  }, (e) => {
-
-    res.status(400).send(e);
-  }).catch((e) => res.status(400).send(e));
 });
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
 
   var user = new User({
     email: req.body.email,
@@ -43,13 +46,16 @@ app.post('/register', (req, res) => {
     Name: req.body.firstName,
     gender: req.body.gender
   });
-  user.save().then((doc) => {
-    console.log(doc);
-    res.send(doc);
-  }, (e) => {
-    console.log(e);
+  var newUser =  await user.save();
+  if(newUser)
+  {
+    res.send(newUser);
+  }
+  else
+  {
     res.status(400).send(e);
-  })
+  }
+  
 })
 
 app.post('/dashboard',(req,res)=>{
