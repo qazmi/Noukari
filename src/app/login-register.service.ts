@@ -35,7 +35,7 @@ export class LoginRegisterService {
     .pipe(map(data => {
       if(data)
       {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/profile');
         return data;
       }
       

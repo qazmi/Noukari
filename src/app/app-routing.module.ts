@@ -20,14 +20,12 @@ const routes: Routes = [
     component: LayoutComponent, 
     children: [
                 { path: '', component: HomeComponent, pathMatch: 'full'},
-                { path: 'dashboard', component: DashboardComponent }
+                { path: 'dashboard', component: DashboardComponent },
+                { path: 'profile', component: ProfileComponent }
               ]
 },
 {
   path: 'login', component: LoginComponent 
-},
-{
-  path: 'profile', component: ProfileComponent 
 },
 {
   path: 'login-email', component: LoginEmailComponent 
