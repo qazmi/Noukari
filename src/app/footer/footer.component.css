@@ -1,142 +1,107 @@
-
-
-.footer-distributed{
-	background-color: #292c2f;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-	box-sizing: border-box;
-	width: 100%;
-	font: bold 16px sans-serif;
-	text-align: left;
-
-	padding: 50px 60px;
-	margin-top: 80px;
-	overflow: hidden;
+#myFooter{
+    padding-top:32px;
 }
 
-/* Footer left */
-
-.footer-distributed .footer-left{
-	float: left;
+#myFooter .containers{
+	text-align: center;
+	background-color: #eee;
 }
 
-.footer-distributed .footer-links{
-	color:  #ffffff;
-	margin: 0 0 10px;
-	padding: 0;
+#myFooter .footer-copyright{
+    margin-bottom: 35px;
+    text-align: center;
+    color: #777;
 }
 
-.footer-distributed .footer-links a{
-	display:inline-block;
-	line-height: 1.8;
-	text-decoration: none;
-	color:  inherit;
+#myFooter ul{
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 18px;
 }
 
-.footer-distributed .footer-company-name{
-	color:  #8f9296;
-	font-size: 14px;
-	font-weight: normal;
-	margin: 0;
+#myFooter a{
+    color: #282b2d;
+    font-size: 18px;
 }
 
-
-/* Footer right */
-
-.footer-distributed .footer-right{
-	float: right;
+#myFooter li{
+    display: inline-block;
+    margin: 0px 15px;
+    line-height: 2;
 }
 
-/* The search form */
-
-.footer-distributed form{
-	position: relative;
+#myFooter .footer-social{
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: #eee;
 }
 
-.footer-distributed form input{
-	display: block;
-	border-radius: 3px;
-	box-sizing: border-box;
-	background-color:  #1f2022;
-	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
-	border: none;
-
-	font: inherit;
-	font-size: 14px;
-	font-weight: normal;
-	color:  #d1d2d2;
-
-	width: 500px;
-	padding: 18px 50px 18px 18px;
+#myFooter .fa{
+    font-size: 36px;
+    margin-right: 15px;
+    margin-left: 20px;
+    background-color: white;
+    color: #d0d0d0;
+    border-radius: 51%;
+    padding: 10px;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    line-height: 43px;
+    text-decoration: none;
+    transition:color 0.2s;
 }
 
-.footer-distributed form input:focus{
-	outline: none;
+#myFooter .fa-facebook:hover{
+   color: #2b55ff;
 }
 
-/* Changing the placeholder color */
-
-.footer-distributed form input::-webkit-input-placeholder {
-	color:  #5c666b;
+#myFooter .fa-facebook:focus{
+    color: #2b55ff; 
 }
 
-.footer-distributed form input::-moz-placeholder {
-	opacity: 1;
-	color:  #5c666b;
+#myFooter .fa-google-plus:hover{
+    color:red;
 }
 
-.footer-distributed form input:-ms-input-placeholder{
-	color:  #5c666b;
+#myFooter .fa-google-plus:focus{
+    color:red;
 }
 
-/* The magnify glass icon */
-
-.footer-distributed form i{
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: 16px;
-	right: 18px;
-
-	color: #d1d2d2;
-	font-size: 18px;
-}
-
-/* If you don't want the footer to be responsive, remove these media queries */
-
-@media (max-width: 1000px) {
-
-	.footer-distributed form input{
-		width: 300px;
-	}
+#myFooter .fa-twitter:hover{
+    color: #00aced;
 
 }
 
-@media (max-width: 800px) {
+#myFooter .fa-twitter:focus{
+    color:#00aced;
+}
 
-	.footer-distributed{
-		padding: 30px;
-		text-align: center;
-		font: bold 14px sans-serif;
-	}
 
-	.footer-distributed .footer-company-name{
-		margin-top: 10px;
-		font-size: 12px;
-	}
 
-	.footer-distributed .footer-left,
-	.footer-distributed .footer-right{
-		float: none;
-		max-width: 300px;
-		margin: 0 auto;
-	}
+/* CSS used for positioning the footers at the bottom of the page. */
+/* You can remove this. */
 
-	.footer-distributed .footer-left{
-		margin-bottom: 20px;
-	}
+html{
+    height: 100%;
+}
 
-	.footer-distributed form input{
-		width: 100%;
-	}
+body{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    height: 100%;
+}
 
+.content{
+   flex: 1 0 auto;
+   -webkit-flex: 1 0 auto;
+   min-height: 200px;
+}
+
+#myFooter{
+   flex: 0 0 auto;
+   -webkit-flex: 0 0 auto;
 }
