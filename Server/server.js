@@ -62,7 +62,7 @@ app.post('/dashboard',(req,res)=>{
 
   console.log(req.body);
   Job.find({title: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docsbyJobTitle)=>{
-    console.log(docsbyJobTitle);
+   // console.log(docsbyJobTitle);
     if(docsbyJobTitle.length == 0)
     {
       Job.find({employer: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docbyemployer)=>{
