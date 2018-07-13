@@ -8,6 +8,8 @@ import{RegisterComponent} from './register/register.component'
 import {ProfileComponent} from './profile/profile.component'
 import {DashboardComponent} from './dashboard/dashboard.component'
 import {LoginEmailComponent} from './login-email/login-email.component'
+ 
+import {LoginRegisterService as LoggedIn} from './login-register.service'
 
 
 const routes: Routes = [
@@ -21,7 +23,7 @@ const routes: Routes = [
     children: [
                 { path: '', component: HomeComponent, pathMatch: 'full'},
                 { path: 'dashboard', component: DashboardComponent },
-                { path: 'profile', component: ProfileComponent }
+                { path: 'profile', component: ProfileComponent , canActivate :[LoggedIn] }
               ]
 },
 {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from "@angular/router";
+import { Router, CanActivate } from "@angular/router";
 import {Observable,of} from 'rxjs'
 import { map } from 'rxjs/operators';
 import {HttpParams} from "@angular/common/http";
@@ -10,8 +10,9 @@ import {HttpParams} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class LoginRegisterService {
+export class LoginRegisterService implements CanActivate {
 
+  userAuthenticated : boolean;
   constructor(private _http:HttpClient, private router: Router) { }
 
   registerUser(user) : Observable<any> { 
@@ -35,6 +36,7 @@ export class LoginRegisterService {
     .pipe(map(data => {
       if(data)
       {
+        this.userAuthenticated = true;
         this.router.navigateByUrl('/profile');
         return data;
       }
@@ -42,6 +44,10 @@ export class LoginRegisterService {
 
     }));
    }
+
+   canActivate(): boolean {
+     return this.userAuthenticated;
+  }
 
    
 }
