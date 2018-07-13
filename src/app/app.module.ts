@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule }    from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './_layout/header/header.component';
@@ -18,6 +19,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import {AuthService} from './auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginEmailComponent } from './login-email/login-email.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import {LoginRegisterService} from './login-register.service'
 
@@ -46,6 +48,8 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+	BrowserAnimationsModule,
+    MDBBootstrapModule.forRoot(),
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -54,6 +58,7 @@ export const firebaseConfig = {
     AngularFireAuthModule
   ],
   providers: [AuthService,LoginRegisterService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

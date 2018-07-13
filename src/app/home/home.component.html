@@ -8,7 +8,34 @@
       <p>
         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a>
       </p>
+
     </div>
     
   
   </div>
+
+  <div class="row">
+    <div class="container">
+        <div class="col-sm-12">
+            <mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [type]="'carousel-thumbnails'">
+                <!--First slide-->
+                <mdb-slide>
+                    <img class="d-block " src="../assets/images/MaleWDep.jpg" alt="First slide">
+                </mdb-slide>
+                <!--/First slide-->
+                <!--Second slide-->
+                <mdb-slide>
+                    <img class="d-block " src="../assets/images/FemWDep.jpg" alt="Second slide">
+                </mdb-slide>
+                <!--/Second slide-->
+                <!--Third slide-->
+                <mdb-slide>
+                    <img class="d-block w-190" src="../assets/images/FemNoDep.jpg" alt="Third slide">
+                </mdb-slide>
+                <!--/Third slide-->
+            </mdb-carousel>
+            <!--/.Carousel Wrapper-->
+
+        </div>
+    </div>
+</div>
