@@ -21,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginEmailComponent } from './login-email/login-email.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-import {LoginRegisterService} from './login-register.service'
+import {LoginRegisterService} from './login-register.service';
+import { ApplyJobComponent } from './apply-job/apply-job.component'
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCtVMi5vcDNZMHenOhm_7Px0YR90pl1oGE",
@@ -44,7 +45,8 @@ export const firebaseConfig = {
     ProfileComponent,
     FooterComponent,
     DashboardComponent,
-    LoginEmailComponent
+    LoginEmailComponent,
+    ApplyJobComponent
   ],
   imports: [
     BrowserModule,

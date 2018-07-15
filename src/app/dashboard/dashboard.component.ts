@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   constructor(private dataservice:JobService) { }
 
   ngOnInit() {
+    this.searchText = 'Angular';
   }
 
   onSearch()

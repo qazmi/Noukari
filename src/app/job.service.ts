@@ -8,7 +8,7 @@ import {HttpParams} from "@angular/common/http";
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' })
 };
 
 @Injectable({
@@ -28,4 +28,17 @@ export class JobService {
 
     }));
    }
+
+   /*
+   public uploadFile(fileToUpload: File) {
+    const _formData = new FormData();
+    _formData.append(fileToUpload.name, fileToUpload ); 
+    console.log(fileToUpload);  
+    return this._http.post("http://localhost:3000/upload",{file:fileToUpload})
+    .pipe(map(data=>{
+
+    }))
+  }
+
+  */
 }

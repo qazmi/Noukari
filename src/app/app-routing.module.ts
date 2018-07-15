@@ -8,6 +8,7 @@ import{RegisterComponent} from './register/register.component'
 import {ProfileComponent} from './profile/profile.component'
 import {DashboardComponent} from './dashboard/dashboard.component'
 import {LoginEmailComponent} from './login-email/login-email.component'
+import {ApplyJobComponent} from './apply-job/apply-job.component'
  
 import {LoginRegisterService as LoggedIn} from './login-register.service'
 
@@ -30,9 +31,11 @@ const routes: Routes = [
   path: 'login', component: LoginComponent 
 },
 {
+  path: 'apply', component: ApplyJobComponent
+},
+{
   path: 'login-email', component: LoginEmailComponent 
 },
-
 { 
   path: 'register', component: RegisterComponent
 }
