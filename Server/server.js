@@ -8,57 +8,64 @@ const fileUpload = require('express-fileupload');
 const { mongoose } = require('./Database/mongosse')
 var { User } = require('./Models/User')
 var { Job } = require('./Models/Job')
+var {authenticate} = require('./Middleware/authenticate')
 
 const app = express();
-
+const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(fileUpload());
 app.use(express.static(__dirname + '/../dist/Noukari'));
 
 
+// app.get('/', (req, res) => {
 
-app.get('/', (req, res) => {
-
-  res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
-})
+//   res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
+// })
 
 app.post('/login-email', async (req, res) => {
+
   
-  var credentials =  await User.findOne({
-      email: req.body.email,
-      password: req.body.password
-    }
-  );
+  var body = _.pick(req.body,['email','password'])
+  var user = new User(body);
+ // user.password = '$2a$10$LxZoaADtBAVGCLZq0Wl5jeTRXAa1vbc7X7OpJJ00EP41tAcolLlI6';
+  console.log(user);
+  
+  var credentials =  await User.findOne(body);
   if(credentials)
   {
-    res.send(credentials);
+      res.send(credentials);
+      
   }
   else
   {
     res.status(400).send(new Error('User doesnot exsist'));
   }
 
+  
+
 });
 
 app.post('/register', async (req, res) => {
 
-  // var user = new User({
-  //   email: req.body.email,
-  //   password: req.body.password,
-  //   Name: req.body.firstName,
-  //   gender: req.body.gender
-  // });
-  
-  var body = _.pick(req.body,['email','password'])
+  var body = _.pick(req.body,['firstName','email','password','gender'])
   var user = new User(body);
-  console.log(user.email,user.password);
   user.save().then(()=>{
     return user.generateAuthToken();
   }).then((token)=>{
     res.header('x-auth',token).send(user);
   }).catch((e)=>res.status(400).send(e));
   
+})
+
+
+
+app.get('/users/me',authenticate,(req,res)=>{
+
+ 
+  res.send(req.user);
+  
+
 })
 
 app.post('/dashboard',(req,res)=>{
@@ -99,8 +106,8 @@ app.post('/upload', function(req, res) {
   });
 });
 */
-app.listen(3000, () => {
-  console.log('Server Listening');
+app.listen(port, () => {
+  console.log(`Server Listening on Port ${port}` );
 })
 
 

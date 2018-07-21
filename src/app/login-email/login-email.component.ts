@@ -20,7 +20,7 @@ export class LoginEmailComponent implements OnInit {
   {
     console.log(this.user.email,this.user.password);
     this.loginService.loginUser(this.user).subscribe((results)=>{
-      console.log('Results',results);
+     // console.log('Results',results);
     })
 
   }

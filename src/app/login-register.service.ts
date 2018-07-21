@@ -4,6 +4,8 @@ import { Router, CanActivate } from "@angular/router";
 import {Observable,of} from 'rxjs'
 import { map } from 'rxjs/operators';
 import {HttpParams} from "@angular/common/http";
+import {jwt} from 'jsonwebtoken'
+import * as _ from 'lodash'
 
 
 
@@ -16,7 +18,7 @@ export class LoginRegisterService implements CanActivate {
   constructor(private _http:HttpClient, private router: Router) { }
 
   registerUser(user) : Observable<any> { 
-    console.log(`service email weather ${user.email},${user.pass}`);
+    console.log(`login service ${user.email},${user.pass}`);
    return this._http
      .post("http://localhost:3000/register",user)
     .pipe(map(data => {
@@ -33,12 +35,15 @@ export class LoginRegisterService implements CanActivate {
       email:user.email,
       password:user.password
      })
-    .pipe(map(data => {
-      if(data)
+    .pipe(map(token => {
+      if(token)
       {
+      
+      // var token =  _.pick(data,['token']);
+       console.log(token);
         this.userAuthenticated = true;
         this.router.navigateByUrl('/profile');
-        return data;
+        return token;
       }
       
 
