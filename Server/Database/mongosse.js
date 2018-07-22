@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Noukari')
+mongoose.connect('mongodb://alikazmi:saak.51214@ds147011.mlab.com:47011/noukari' )
 
 
 module.exports = {mongoose}
