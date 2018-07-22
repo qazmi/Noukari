@@ -24,19 +24,19 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
 })
 
-app.post('/login-email', async (req, res) => {
-
+app.post('/login-email',(req, res) => {
 
   var body = _.pick(req.body, ['email', 'password'])
-  var user = new User(body);
+  User.findByCredentials(body.email,body.password).then((user)=>{
+     return user.generateAuthToken().then((token)=>{
+      res.header('x-auth', token).send(user);       
 
-  var credentials = await User.findOne(body);
-  if (credentials) {
-    res.send(credentials);
+    })
+    
 
-  } else {
+  }).catch((e)=>{
     res.status(400).send();
-  }
+  });
 
 });
 

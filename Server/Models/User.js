@@ -93,6 +93,36 @@ UserInfo.statics.findByToken = function(token)
     })
 }
 
+UserInfo.statics.findByCredentials = function(email,password)
+{
+    var User = this;
+    return User.findOne({email}).then((foundUser)=>{
+        if(!foundUser)
+        {
+            return Promise.reject();
+        }
+        return new Promise((resolve,reject)=>{
+           // console.log(foundUser);
+           bcrypt.compare(password,foundUser.password,(err,res)=>{
+               if(res)
+               {
+                   console.log('password verifiedd',foundUser)
+                   resolve(foundUser);
+               }
+               else
+               {
+                   reject();
+               }
+           })
+           
+            
+        })
+       console.log(foundUser);
+
+    }).catch((e)=> reject());
+
+}
+
 UserInfo.pre('save',function(next){
     var user = this;
 
