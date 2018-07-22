@@ -938,8 +938,9 @@ var LoginRegisterService = /** @class */ (function () {
     LoginRegisterService.prototype.registerUser = function (user) {
         var _this = this;
         console.log("login service " + user.email + "," + user.pass);
+        //http://localhost:3000
         return this._http
-            .post("http://localhost:3000/register", user)
+            .post("https://immense-earth-64169.herokuapp.com//register", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
             _this.router.navigateByUrl('/login');
             return data;
@@ -948,8 +949,9 @@ var LoginRegisterService = /** @class */ (function () {
     LoginRegisterService.prototype.loginUser = function (user) {
         var _this = this;
         console.log("service email pass " + user.email + "," + user.password);
+        //http://localhost:3000
         return this._http
-            .post("http://localhost:3000/login-email", {
+            .post("https://immense-earth-64169.herokuapp.com/login-email", {
             email: user.email,
             password: user.password
         })
