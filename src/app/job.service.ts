@@ -21,7 +21,7 @@ export class JobService {
   getJobs(searchString) : Observable<any> { 
     console.log(`Job service  ${searchString}`);
    return this._http
-     .post("http://localhost:3000/dashboard",{searchStr: searchString})
+     .post("https://immense-earth-64169.herokuapp.com/dashboard",{searchStr: searchString})
     .pipe(map(data => {
       
       return data;

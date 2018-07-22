@@ -21,7 +21,7 @@ export class LoginRegisterService implements CanActivate {
     console.log(`login service ${user.email},${user.pass}`);
     //http://localhost:3000
    return this._http
-     .post("https://immense-earth-64169.herokuapp.com//register",user)
+     .post("https://immense-earth-64169.herokuapp.com/register",user)
     .pipe(map(data => {
       this.router.navigateByUrl('/login');
       return data;
