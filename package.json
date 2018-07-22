@@ -2,7 +2,7 @@
   "name": "noukari",
   "version": "0.0.0",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node Server/server.js"
   },
   "engines":{
     "node": "10.4.1"
