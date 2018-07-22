@@ -5,18 +5,19 @@ const _ = require('lodash');
 
 const fileUpload = require('express-fileupload');
 
-const { mongoose } = require('./Database/mongosse')
-var { User } = require('./Models/User')
-var { Job } = require('./Models/Job')
+const {mongoose} = require('./Database/mongosse')
+var {User} = require('./Models/User')
+var {Job} = require('./Models/Job')
 var {authenticate} = require('./Middleware/authenticate')
 
 const app = express();
 const port = process.env.PORT || 3000;
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
 app.use(fileUpload());
 app.use(express.static(__dirname + '/../dist/Noukari'));
-
 
 app.get('/', (req, res) => {
 
@@ -25,66 +26,66 @@ app.get('/', (req, res) => {
 
 app.post('/login-email', async (req, res) => {
 
-  
-  var body = _.pick(req.body,['email','password'])
-  var user = new User(body);
- // user.password = '$2a$10$LxZoaADtBAVGCLZq0Wl5jeTRXAa1vbc7X7OpJJ00EP41tAcolLlI6';
-  console.log(user);
-  
-  var credentials =  await User.findOne(body);
-  if(credentials)
-  {
-      res.send(credentials);
-      
-  }
-  else
-  {
-    res.status(400).send(new Error('User doesnot exsist'));
-  }
 
-  
+  var body = _.pick(req.body, ['email', 'password'])
+  var user = new User(body);
+
+  var credentials = await User.findOne(body);
+  if (credentials) {
+    res.send(credentials);
+
+  } else {
+    res.status(400).send();
+  }
 
 });
 
 app.post('/register', async (req, res) => {
 
-  var body = _.pick(req.body,['firstName','email','password','gender'])
+  var body = _.pick(req.body, ['firstName', 'email', 'password', 'gender'])
   var user = new User(body);
-  user.save().then(()=>{
+  user.save().then(() => {
     return user.generateAuthToken();
-  }).then((token)=>{
-    res.header('x-auth',token).send(user);
-  }).catch((e)=>res.status(400).send(e));
-  
+  }).then((token) => {
+    res.header('x-auth', token).send(user);
+  }).catch((e) => res.status(400).send(e));
+
 })
 
 
 
-app.get('/users/me',authenticate,(req,res)=>{
+app.get('/users/me', authenticate, (req, res) => {
 
- 
   res.send(req.user);
-  
 
 })
 
-app.post('/dashboard',(req,res)=>{
+app.post('/dashboard', (req, res) => {
 
   console.log(req.body);
-  Job.find({title: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docsbyJobTitle)=>{
-   // console.log(docsbyJobTitle);
-    if(docsbyJobTitle.length == 0)
-    {
-      Job.find({employer: { $regex: '.*' + req.body.searchStr + '.*',$options: 'i'  } }).then((docbyemployer)=>{
-        res.send(docbyemployer);
-      },(e)=>{console.log(e)});
+  Job.find({
+    title: {
+      $regex: '.*' + req.body.searchStr + '.*',
+      $options: 'i'
     }
-    else
-    {
+  }).then((docsbyJobTitle) => {
+
+    if (docsbyJobTitle.length == 0) {
+      Job.find({
+        employer: {
+          $regex: '.*' + req.body.searchStr + '.*',
+          $options: 'i'
+        }
+      }).then((docbyemployer) => {
+        res.send(docbyemployer);
+      }, (e) => {
+        console.log(e)
+      });
+    } else {
       res.send(docsbyJobTitle);
     }
-    
-  },(e)=> console.log(e));
+
+  }, (e) => console.log(e));
 })
 /*
 app.post('/upload', function(req, res) {
@@ -107,9 +108,5 @@ app.post('/upload', function(req, res) {
 });
 */
 app.listen(port, () => {
-  console.log(`Server Listening on Port ${port}` );
+  console.log(`Server Listening on Port ${port}`);
 })
-
-
-
-

@@ -1094,7 +1094,7 @@ module.exports = "<h1>Profile Works</h1>"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfileComponent", function() { return ProfileComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _job_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../job.service */ "./src/app/job.service.ts");
+/* harmony import */ var _login_register_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../login-register.service */ "./src/app/login-register.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1110,6 +1110,10 @@ var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(dataservice) {
         this.dataservice = dataservice;
     }
+    ProfileComponent.prototype.userLoggedin = function () {
+        return true;
+        // return this.dataservice.userAuthenticated;
+    };
     ProfileComponent.prototype.ngOnInit = function () {
     };
     ProfileComponent = __decorate([
@@ -1118,7 +1122,7 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./profile.component.html */ "./src/app/profile/profile.component.html"),
             styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/profile/profile.component.css")]
         }),
-        __metadata("design:paramtypes", [_job_service__WEBPACK_IMPORTED_MODULE_1__["JobService"]])
+        __metadata("design:paramtypes", [_login_register_service__WEBPACK_IMPORTED_MODULE_1__["LoginRegisterService"]])
     ], ProfileComponent);
     return ProfileComponent;
 }());
