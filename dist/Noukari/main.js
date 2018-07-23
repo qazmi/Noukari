@@ -61,7 +61,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">\n   \n    Noukari.pk\n  </a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link \" routerLink=\"/dashboard\">Dashboard</a>\n      </li>\n      <li class=\"nav-item\">\n          <a class=\"nav-link \" routerLink=\"/profile\">Profile</a>\n        </li>\n        \n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" routerLink=\"/login\" type=\"submit\">Login</button>\n    </form>\n  </div>\n</nav>\n\n"
+module.exports = "\r\n\r\n<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n  <a class=\"navbar-brand\" href=\"#\">\r\n   \r\n    Noukari.pk\r\n  </a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" routerLink=\"/\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link \" routerLink=\"/dashboard\">Dashboard</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n          <a class=\"nav-link \" routerLink=\"/profile\">Profile</a>\r\n        </li>\r\n    </ul>\r\n    <form class=\"form-inline my-2 my-lg-0\">\r\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" routerLink=\"/login\" type=\"submit\">Login</button>\r\n    </form>\r\n  </div>\r\n</nav>\r\n\r\n"
 
 /***/ }),
 
@@ -812,7 +812,7 @@ var JobService = /** @class */ (function () {
         //https://immense-earth-64169.herokuapp.com
         //http://localhost:3000
         return this._http
-            .post("http://localhost:3000/dashboard", { searchStr: searchString })
+            .post("https://immense-earth-64169.herokuapp.com/dashboard", { searchStr: searchString })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
             return data;
         }));
@@ -943,7 +943,7 @@ var LoginRegisterService = /** @class */ (function () {
         //https://immense-earth-64169.herokuapp.com
         //http://localhost:3000
         return this._http
-            .post("http://localhost:3000/register", user)
+            .post("https://immense-earth-64169.herokuapp.com/register", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
             _this.router.navigateByUrl('/login');
             return data;
@@ -955,7 +955,7 @@ var LoginRegisterService = /** @class */ (function () {
         //https://immense-earth-64169.herokuapp.com
         //http://localhost:3000
         return this._http
-            .post("http://localhost:3000/login-email", {
+            .post("https://immense-earth-64169.herokuapp.com/login-email", {
             email: user.email,
             password: user.password
         })
