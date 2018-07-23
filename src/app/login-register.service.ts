@@ -19,6 +19,7 @@ export class LoginRegisterService implements CanActivate {
 
   registerUser(user) : Observable<any> { 
     console.log(`login service ${user.email},${user.pass}`);
+    //https://immense-earth-64169.herokuapp.com
     //http://localhost:3000
    return this._http
      .post("https://immense-earth-64169.herokuapp.com/register",user)
@@ -31,6 +32,7 @@ export class LoginRegisterService implements CanActivate {
 
    loginUser(user) : Observable<any> { 
     console.log(`service email pass ${user.email},${user.password}`);
+    //https://immense-earth-64169.herokuapp.com
     //http://localhost:3000
    return this._http
      .post("https://immense-earth-64169.herokuapp.com/login-email",{

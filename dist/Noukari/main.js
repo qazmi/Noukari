@@ -730,7 +730,7 @@ module.exports = "body {\r\n    padding-top: 50px;\r\n}\r\n.dropdown.dropdown-lg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron\">\n    <div class=\"container\">\n      <h1 class=\"display-3\">What We Do!!!</h1>\n      <p class=\"lead\">The portal is designed for internal recruitment purpose more than a regular job portal. It will simplify the normal paper\n        work to shortlist candidates and interview calling. The software is featured to filter candidates, inform them for\n        interview, shortlist candidates, store large number of resumes according to server capacity and normal job portal features\n        like candidates can apply for jobs from front end of the portal etc.</p>\n      <p>\n        <a class=\"btn btn-primary btn-lg\" href=\"#\" role=\"button\">Learn more &raquo;</a>\n      </p>\n\n    </div>\n    \n  \n  </div>\n\n  <div class=\"row\">\n    <div class=\"container\">\n        <div class=\"col-sm-12\">\n            <mdb-carousel [isControls]=\"true\" class=\"carousel slide carousel-fade\" [type]=\"'carousel-thumbnails'\">\n                <!--First slide-->\n                <mdb-slide>\n                    <img class=\"d-block \" src=\"../assets/images/MaleWDep.jpg\" alt=\"First slide\">\n                </mdb-slide>\n                <!--/First slide-->\n                <!--Second slide-->\n                <mdb-slide>\n                    <img class=\"d-block \" src=\"../assets/images/FemWDep.jpg\" alt=\"Second slide\">\n                </mdb-slide>\n                <!--/Second slide-->\n                <!--Third slide-->\n                <mdb-slide>\n                    <img class=\"d-block w-190\" src=\"../assets/images/FemNoDep.jpg\" alt=\"Third slide\">\n                </mdb-slide>\n                <!--/Third slide-->\n            </mdb-carousel>\n            <!--/.Carousel Wrapper-->\n\n        </div>\n    </div>\n</div>\n"
+module.exports = "<div class=\"jumbotron\">\n    <div class=\"container\">\n        <h1 class=\"display-3\">What We Do!!!</h1>\n        <p class=\"lead\">The portal is designed for internal recruitment purpose more than a regular job portal. It will simplify the normal\n            paper work to shortlist candidates and interview calling. The software is featured to filter candidates, inform\n            them for interview, shortlist candidates, store large number of resumes according to server capacity and normal\n            job portal features like candidates can apply for jobs from front end of the portal etc.</p>\n        <p>\n            <a class=\"btn btn-primary btn-lg\" href=\"#\" role=\"button\">Learn more &raquo;</a>\n        </p>\n\n    </div>\n\n\n</div>\n\n\n\n<div class=\"jumbotron\">\n    <div class=\"container\">\n        <h1 class=\"display-3\">Here are some top technologies</h1>\n\n    </div>\n\n\n</div>\n\n\n<div class=\"container\">\n    <mdb-carousel [isControls]=\"true\" class=\"carousel slide carousel-fade\" [type]=\"'carousel-thumbnails'\">\n        <!--First slide-->\n        <mdb-slide>\n            <img class=\"d-block \" src=\"../assets/images/angular.png\" alt=\"First slide\">\n        </mdb-slide>\n        <!--/First slide-->\n        <!--Second slide-->\n        <mdb-slide>\n            <img class=\"d-block \" src=\"../assets/images/react.png\" alt=\"Second slide\">\n        </mdb-slide>\n        <!--/Second slide-->\n        <!--Third slide-->\n        <mdb-slide>\n            <img class=\"d-block w-190\" src=\"../assets/images/nodejs.png\" alt=\"Third slide\">\n        </mdb-slide>\n        <!--/Third slide-->\n    </mdb-carousel>\n    <!--/.Carousel Wrapper-->\n\n</div>"
 
 /***/ }),
 
@@ -809,6 +809,8 @@ var JobService = /** @class */ (function () {
     }
     JobService.prototype.getJobs = function (searchString) {
         console.log("Job service  " + searchString);
+        //https://immense-earth-64169.herokuapp.com
+        //http://localhost:3000
         return this._http
             .post("https://immense-earth-64169.herokuapp.com/dashboard", { searchStr: searchString })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
@@ -938,6 +940,7 @@ var LoginRegisterService = /** @class */ (function () {
     LoginRegisterService.prototype.registerUser = function (user) {
         var _this = this;
         console.log("login service " + user.email + "," + user.pass);
+        //https://immense-earth-64169.herokuapp.com
         //http://localhost:3000
         return this._http
             .post("https://immense-earth-64169.herokuapp.com/register", user)
@@ -949,6 +952,7 @@ var LoginRegisterService = /** @class */ (function () {
     LoginRegisterService.prototype.loginUser = function (user) {
         var _this = this;
         console.log("service email pass " + user.email + "," + user.password);
+        //https://immense-earth-64169.herokuapp.com
         //http://localhost:3000
         return this._http
             .post("https://immense-earth-64169.herokuapp.com/login-email", {
