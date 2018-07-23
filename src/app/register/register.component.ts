@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   }
   registerUser()
   {
-    console.log(this.user.email,this.user.password,this.user.firstName,this.user.gender);
+    console.log(this.user.email,this.user.password,this.user.firstName);
      this.loginService.registerUser(this.user).subscribe((results)=>{
        console.log('Results',results);
      })
