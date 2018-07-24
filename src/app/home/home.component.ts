@@ -10,12 +10,30 @@ import {JobService} from '../job.service'
 })
 export class HomeComponent implements OnInit {
 
- Jobs:JobDetails[]
-  constructor( ) { }
+ searchStr : String
+  constructor( private service:JobService) { }
   
 
   ngOnInit() {
-   
+    this.searchStr = ''
+  }
+
+  angularSearch()
+  {
+    this.service.searchStr = 'Angular';
+    this.onSearch();
+
+  }
+  reactSearch()
+  {
+    this.service.searchStr = 'React';
+    this.onSearch();
+
+  }
+
+  onSearch()
+  {
+    this.service.getJobs(this.service.searchStr);
   }
 
   // Logout()
