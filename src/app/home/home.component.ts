@@ -20,20 +20,20 @@ export class HomeComponent implements OnInit {
 
   angularSearch()
   {
-    this.service.searchStr = 'Angular';
+   // this.service.searchStr = 'Angular';
     this.onSearch();
 
   }
   reactSearch()
   {
-    this.service.searchStr = 'React';
+   // this.service.searchStr = 'React';
     this.onSearch();
 
   }
 
   onSearch()
   {
-    this.service.getJobs(this.service.searchStr);
+   // this.service.getJobs(this.service.searchStr);
   }
 
   // Logout()
