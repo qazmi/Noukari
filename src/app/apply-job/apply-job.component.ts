@@ -9,14 +9,27 @@ import {JobService} from '../job.service'
 export class ApplyJobComponent implements OnInit {
 
   constructor(private jobService:JobService) { }
-  useCurrent: boolean;
+  selectedFiles: FileList;
+   currentFileUpload: File;
   ngOnInit() {
-    this.useCurrent = false;
+   
   }
 
   useExsistingResume()
   {
-    this.useCurrent = true;
+    
+  }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+  upload() {
+    this.currentFileUpload = this.selectedFiles.item(0);
+   // console.log(this.currentFileUpload);
+    this.jobService.uploadFile(this.currentFileUpload).subscribe((data)=>{
+
+    })
+
   }
 /*
   fileEvent($event) {

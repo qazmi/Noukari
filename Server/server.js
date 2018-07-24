@@ -2,8 +2,8 @@ const express = require('express');
 var bodyParser = require("body-parser");
 const path = require("path");
 const _ = require('lodash');
+var multer  = require('multer')
 
-const fileUpload = require('express-fileupload');
 
 const {mongoose} = require('./Database/mongosse')
 var {User} = require('./Models/User')
@@ -16,13 +16,25 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
-app.use(fileUpload());
+
 app.use(express.static(__dirname + '/../dist/Noukari'));
 
-app.get('/', (req, res) => {
 
-  res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname+'/Uploaded')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.pdf')
+  }
 })
+
+var upload = multer({ storage: storage })
+
+// app.get('/', (req, res) => {
+
+//   res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
+// })
 
 app.post('/login-email',(req, res) => {
 
@@ -87,26 +99,12 @@ app.post('/dashboard', (req, res) => {
 
   }, (e) => console.log(e));
 })
-/*
-app.post('/upload', function(req, res) {
-  console.log(`Request Received ${req.body}`)
-  if (!req.files)
-    return res.status(400).send('No files were uploaded.');
+app.post('/upload', upload.single('file'), (req, res, next) => {
+    console.log(req.body);
+    res.json({'message': 'File uploaded successfully'});
  
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let sampleFile = req.files.sampleFile;
-
-  console.log(req.body);
- 
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv('/somewhere/on/your/server/filename.jpg', function(err) {
-    if (err)
-      return res.status(500).send(err);
- 
-    res.send('File uploaded!');
-  });
 });
-*/
+
 app.listen(port, () => {
   console.log(`Server Listening on Port ${port}`);
 })

@@ -31,16 +31,19 @@ export class JobService {
     }));
    }
 
-   /*
+   
    public uploadFile(fileToUpload: File) {
-    const _formData = new FormData();
-    _formData.append(fileToUpload.name, fileToUpload ); 
-    console.log(fileToUpload);  
-    return this._http.post("http://localhost:3000/upload",{file:fileToUpload})
-    .pipe(map(data=>{
+    const endpoint = 'http://localhost:3000/upload';
+    const formData: FormData = new FormData();
+    formData.append('file', fileToUpload,fileToUpload.name);
 
-    }))
+    return this._http
+      .post(endpoint, formData)
+      .pipe(map(data=>{
+        console.log(data);
+
+      }))
   }
 
-  */
+  
 }
