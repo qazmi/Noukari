@@ -106,7 +106,7 @@ UserInfo.statics.findByCredentials = function(email,password)
            bcrypt.compare(password,foundUser.password,(err,res)=>{
                if(res)
                {
-                   console.log('password verifiedd',foundUser)
+                //    console.log('password verifiedd',foundUser)
                    resolve(foundUser);
                }
                else
@@ -117,7 +117,7 @@ UserInfo.statics.findByCredentials = function(email,password)
            
             
         })
-       console.log(foundUser);
+      // console.log(foundUser);
 
     }).catch((e)=> reject());
 

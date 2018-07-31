@@ -1,8 +1,13 @@
+
+
 const express = require('express');
 var bodyParser = require("body-parser");
 const path = require("path");
 const _ = require('lodash');
-var multer  = require('multer')
+var multer  = require('multer');
+const FileHound = require('filehound');
+const fs = require('fs');
+var nodemailer = require('nodemailer');
 
 
 const {mongoose} = require('./Database/mongosse')
@@ -104,6 +109,87 @@ app.post('/upload', upload.single('file'), (req, res, next) => {
     res.json({'message': 'File uploaded successfully'});
  
 });
+
+app.get('/apply',(req,res)=>{
+
+  const files = FileHound.create()
+  .paths(__dirname+'/Uploaded')
+  .ext('pdf')
+  .find();
+ 
+  files.then((files)=>{
+    console.log(files);
+   // res.header("Access-Control-Allow-Origin", "*");
+   // res.header("Access-Control-Allow-Headers", "X-Requested-With");
+   // res.header('content-type', 'application/pdf');
+   //var Path = files[0];
+   res.send(files);
+
+   // var file = fs.createReadStream(files[0]);
+   // var stat = fs.statSync(files[0]);
+   // res.setHeader('Content-Length', stat.size);
+   // res.setHeader('Content-Type', 'application/pdf');
+   // res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
+   // file.pipe(res);
+   // res.send(file);
+   //res.json({'message': 'File found'});
+  },(e)=>{
+    console.log(e);
+    res.json({'error':'No File Found'})
+  });  
+  
+})
+
+app.post('/sendemail', (request, response, next) => {
+
+  var body = _.pick(request.body, ['email', 'password'])
+  var To =  _.pick(request.body,'to');
+  
+  console.log(To);
+
+  User.findByCredentials(body.email, body.password).then((user) => {
+   // console.log(user.password);
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: user.email,
+        pass: body.password,
+        host: 'smtp.gmail.com',
+        ssl: false
+      }
+    });
+    var mailOptions = {
+      from: body.email,
+      to: body.email, //get from form input field of html file
+      subject: 'Sending Email using Node.js',
+      text: 'That was easy!'
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        response.status(401).send()
+
+      } else {
+
+        response.send({
+          'message': 'You have applied succesfully'
+        });
+
+        console.log('success');
+
+       // response.json()
+      }
+    });
+  },(e)=>{
+    response.status(401).send(e)
+
+  });
+
+});
+
+
+
 
 app.listen(port, () => {
   console.log(`Server Listening on Port ${port}`);

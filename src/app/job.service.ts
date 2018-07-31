@@ -23,7 +23,7 @@ export class JobService {
     //https://immense-earth-64169.herokuapp.com
     //http://localhost:3000
    return this._http
-     .post("https://immense-earth-64169.herokuapp.com/dashboard",{searchStr: searchString})
+     .post("http://localhost:3000/dashboard",{searchStr: searchString})
     .pipe(map(data => {
       
       return data;
@@ -43,6 +43,18 @@ export class JobService {
         console.log(data);
 
       }))
+  }
+
+  public applyForJob()
+  {
+    return this._http.post("https://immense-earth-64169.herokuapp.com/sendemail",{
+      'email':'qazmi.ali@gmail.com',
+      'password':'saak.51214'
+    })
+    .pipe(map(data=>{
+     return data;
+
+    }));
   }
 
   

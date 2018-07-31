@@ -23,6 +23,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import {LoginRegisterService} from './login-register.service';
 import { ApplyJobComponent } from './apply-job/apply-job.component'
+import {DropdownDirective} from './apply-job/apply-job.component'
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCtVMi5vcDNZMHenOhm_7Px0YR90pl1oGE",
@@ -46,7 +47,8 @@ export const firebaseConfig = {
     FooterComponent,
     DashboardComponent,
     LoginEmailComponent,
-    ApplyJobComponent
+    ApplyJobComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ export const firebaseConfig = {
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    
   ],
   providers: [AuthService,LoginRegisterService],
   bootstrap: [AppComponent],

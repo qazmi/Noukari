@@ -11,6 +11,7 @@ export class ApplyJobComponent implements OnInit {
   constructor(private jobService:JobService) { }
   selectedFiles: FileList;
    currentFileUpload: File;
+   emailSent = false;
   ngOnInit() {
    
   }
@@ -29,7 +30,24 @@ export class ApplyJobComponent implements OnInit {
     this.jobService.uploadFile(this.currentFileUpload).subscribe((data)=>{
 
     })
+  }
 
+  applyForJob()
+  {
+    this.jobService.applyForJob().subscribe((data)=>{
+
+      if(data)
+      {
+        this.emailSent = true;
+      }
+      else
+      {
+        
+        this.emailSent = false;
+      }
+
+    })
+    
   }
 /*
   fileEvent($event) {
@@ -46,3 +64,25 @@ export class ApplyJobComponent implements OnInit {
  }
 */
 }
+import {Directive, HostListener, HostBinding} from '@angular/core';
+
+  @Directive({
+    selector: '[appDropdown]'
+  })
+  export class DropdownDirective {
+
+    private isOpen:boolean = false;
+
+    @HostBinding('class.open') get opened(){
+      return this.isOpen;
+    }
+    constructor() { }
+
+    @HostListener('click')open(){
+      this.isOpen = true;
+    }
+
+    @HostListener('mouseleave')close(){
+      this.isOpen = false;
+    }
+  }
