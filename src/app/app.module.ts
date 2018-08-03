@@ -24,6 +24,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {LoginRegisterService} from './login-register.service';
 import { ApplyJobComponent } from './apply-job/apply-job.component'
 import {DropdownDirective} from './apply-job/apply-job.component'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCtVMi5vcDNZMHenOhm_7Px0YR90pl1oGE",
@@ -60,6 +61,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgbModule.forRoot()
     
   ],
   providers: [AuthService,LoginRegisterService],

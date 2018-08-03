@@ -1,11 +1,98 @@
-
 <div class="view overlay z-depth-1-half ">
   <img src="./../../assets/images/bg.jpg" class=".img-fluid. max-width: 100%; height: auto;" alt="">
   <div class="mask rgba-white-light"></div>
 </div>
+<div class="jumbotron">
+  <div class="row ">
+    <div class="col-sm-12">
+      <div class="container">
+          <h1 class="display-2">How We work for You</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top" src="./../../assets/images/search.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Search millions of jobs</h5>
+          <p class="card-text">We've got more than 5 million of 'em—so you've got plenty of options. Plus, we'll send an alert when a good fit
+            for you is posted.</p>
 
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top" src="./../../assets/images/discovered.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Get Discovered</h5>
+          <p class="card-text">Create an account and upload your resume to be found by the recruiters who search Monster's databases every day.</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top" src="./../../assets/images/candiadte.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Be a better candidate</h5>
+          <p class="card-text">We've got your back. Our career advice, resume services and education partners give you a leg up in the job search.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="thumbnail text-center">
+        <img src="./../../assets/images/cprofile.jpg" alt="" class="card-img-top">
+        <div class="caption">
+          <p>
+            <strong> the inside scoop on employers before you apply. Check out Monster's company profiles as well as employee reviews—powered
+              by —to get a sense of culture, pay and benefits</strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-6">
+      <div class="thumbnail text-center">
+        <img src="./../../assets/images/advice.jpg" alt="" class="card-img-top">
+        <div class="caption">
+          <p>
+            <strong> Monster has the expert advice you need for your job search and career—interview tips, networking icebreakers,
+              salary negotiation strategies, our latest Monster 100 list of companies hiring now and more.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="jumbotron">
+    <h1 class="display-4">Become a Member!</h1>
+    <p class="lead">We get it—looking for work is hard work. Let us make it easier for you. Sign up for Monster, then upload your resume so recruiters can find you and so you can apply for jobs more quickly. Plus you can get job alerts and helpful job content delivered to your inbox. What are you waiting for?.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Create an Account</a>
+    </p>
+  </div>
+  <div class="jumbotron">
+      <div class="thumbnail text-center">
+          <img src="./../../assets/images/advice.jpg" alt="" class="card-img-top">
+          <div class="caption">
+            <p>
+              <strong> Monster has the expert advice you need for your job search and career—interview tips, networking icebreakers,
+                salary negotiation strategies, our latest Monster 100 list of companies hiring now and more.
+              </strong>
+            </p>
+          </div>
+        </div>
+    </div>
+
+<!-- <div class="jumbotron">
   <div class="col-sm-12">
     <h1 class="display-2">Here are some top technologies</h1>
   </div>
@@ -16,7 +103,7 @@
         <div class="card-body">
           <h5 class="card-title">Angular Jobs</h5>
           <p class="card-text"></p>
-          <a routerLink="/dashboard" class="btn btn-primary" (click) = "angularSearch()">Search</a>
+          <a routerLink="/dashboard" class="btn btn-primary" (click)="angularSearch()">Search</a>
         </div>
       </div>
     </div>
@@ -27,86 +114,85 @@
         <div class="card-body">
           <h5 class="card-title">React Jobs.</h5>
           <p class="card-text"></p>
-          <a routerLink="/dashboard" class="btn btn-primary" (click) ="reactSearch()">Search</a>
+          <a routerLink="/dashboard" class="btn btn-primary" (click)="reactSearch()">Search</a>
         </div>
       </div>
     </div>
     <div class="col-sm-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="./../../assets/images/nodejs.png" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Node Js Jobs</h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-primary">Search</a>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-sm-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="./../../assets/images/mongo.png" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Mongo DB Jobs</h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-primary">Search</a>
-              </div>
-            </div>
-          </div>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="./../../assets/images/nodejs.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Node Js Jobs</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Search</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="./../../assets/images/mongo.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Mongo DB Jobs</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Search</a>
+        </div>
+      </div>
+    </div>
 
 
   </div>
-  <!--Second Row-->
-</div>
+</div> -->
+<!-- 
 <div class="jumbotron">
-        <div class="col-sm-12">
-          <h1 class="display-2">Some more technologies you may be interested in</h1>
+  <div class="col-sm-12">
+    <h1 class="display-2">Some more technologies you may be interested in</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="./../../assets/images/java.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Java Jobs</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Search</a>
         </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="./../../assets/images/java.png" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Java Jobs</h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-primary">Search</a>
-              </div>
-            </div>
-          </div>
-      
-          <div class="col-sm-3">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="./../../assets/images/net.png" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">.Net Jobs.</h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-primary">Search</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-                  <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./../../assets/images/mysql.png" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">MySql</h5>
-                      <p class="card-text"></p>
-                      <a href="#" class="btn btn-primary">Search</a>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="col-sm-3">
-                  <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="./../../assets/images/ruby.png" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">Ruby on Rails Jobs</h5>
-                      <p class="card-text"></p>
-                      <a href="#" class="btn btn-primary">Search</a>
-                    </div>
-                  </div>
-                </div>
-      
-      
-        </div>
-        <!--Second Row-->
       </div>
-      
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="./../../assets/images/net.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">.Net Jobs.</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Search</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="./../../assets/images/mysql.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">MySql</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Search</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="./../../assets/images/ruby.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Ruby on Rails Jobs</h5>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">Search</a>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div> -->

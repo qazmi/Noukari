@@ -8,6 +8,7 @@ var multer  = require('multer');
 const FileHound = require('filehound');
 const fs = require('fs');
 var nodemailer = require('nodemailer');
+var parseString = require('xml2js').parseString;
 
 
 const {mongoose} = require('./Database/mongosse')
@@ -36,40 +37,68 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
-// app.get('/', (req, res) => {
+app.post('/login-email',async (req, res) => {
 
-//   res.sendFile(path.join(__dirname + '/../dist/Noukari/index.html'));
-// })
+  const body = _.pick(req.body, ['email', 'password']);
+  try{
+    const user = await  User.findByCredentials(body.email,body.password);
+    const token = await user.generateAuthToken();
+    res.header('x-auth', token).send(user);
 
-app.post('/login-email',(req, res) => {
+  }catch(e)
+  {
+    res.status(400).send()
 
-  var body = _.pick(req.body, ['email', 'password'])
-  User.findByCredentials(body.email,body.password).then((user)=>{
-     return user.generateAuthToken().then((token)=>{
-      res.header('x-auth', token).send(user);       
-
-    })
-    
-
-  }).catch((e)=>{
-    res.status(400).send();
-  });
-
+  }
+  
 });
 
 app.post('/register', async (req, res) => {
 
-  var body = _.pick(req.body, ['firstName', 'email', 'password', 'gender'])
+  var body = _.pick(req.body, ['firstName', 'email', 'password', 'gender']);
   var user = new User(body);
-  user.save().then(() => {
-    return user.generateAuthToken();
-  }).then((token) => {
-    res.header('x-auth', token).send(user);
-  }).catch((e) => res.status(400).send(e));
-
+  try{
+      var newUser = await user.save();
+      var token = await newUser.generateAuthToken();
+      if(token)
+      {
+        res.header('x-auth', token).send(user);
+      }
+      else
+      {
+        throw new Error();
+      }
+  }
+  catch(e)
+  {
+    res.status(400).send();
+  }
+  
 })
 
+app.post('/CV', async (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+  try {
+    var user = await User.findByCredentials(body.email, body.password);
+    if (user) {
+      fs.readdir(__dirname + '/Uploaded', function (err, files) {
+        if (err) {
+          return console.log('Unable to scan directory: ' + err);
+        }
+        res.json({ 'files': files }).send();
+      })
 
+    }
+    else {
+
+      throw new Error();
+    }
+  }
+  catch (e) {
+    res.status(400).send();
+  }
+
+})
 
 app.get('/users/me', authenticate, (req, res) => {
 
@@ -77,32 +106,53 @@ app.get('/users/me', authenticate, (req, res) => {
 
 })
 
-app.post('/dashboard', (req, res) => {
+//This function is incomplete- would look into it later
+app.get('/Jobs',(req,res)=>{
+  fs.readFile( __dirname+ '/JOBS.xml', function(err, data) {
+   parseString(data, function (err, result) {
+     console.dir(result);
+ });
+ //console.log(data);
+ res.status(200).send();
+})
+});
 
-  console.log(req.body);
-  Job.find({
-    title: {
-      $regex: '.*' + req.body.searchStr + '.*',
-      $options: 'i'
-    }
-  }).then((docsbyJobTitle) => {
+app.post('/dashboard', async (req, res) => {
 
-    if (docsbyJobTitle.length == 0) {
-      Job.find({
+  try{
+    const docsbyJobTitle = await Job.find({
+      title: {
+        $regex: '.*' + req.body.searchStr + '.*',
+        $options: 'i'
+      }
+    });
+    if(docsbyJobTitle.length == 0)
+    {
+      const docbyemployer = await Job.find({
         employer: {
           $regex: '.*' + req.body.searchStr + '.*',
           $options: 'i'
         }
-      }).then((docbyemployer) => {
-        res.send(docbyemployer);
-      }, (e) => {
-        console.log(e)
       });
-    } else {
+      if(docbyemployer.length == 0)
+      {
+        throw new Error();
+      }
+    
+      res.send(docbyemployer);
+    
+    }
+    else
+    {
       res.send(docsbyJobTitle);
     }
 
-  }, (e) => console.log(e));
+  }
+  catch(e)
+  {
+    res.status(400).send();
+  }
+  
 })
 app.post('/upload', upload.single('file'), (req, res, next) => {
     console.log(req.body);
@@ -112,6 +162,8 @@ app.post('/upload', upload.single('file'), (req, res, next) => {
 
 app.get('/apply',(req,res)=>{
 
+  var resfile = _.pick(req.body,['file']);
+  console.log(resfile);
   const files = FileHound.create()
   .paths(__dirname+'/Uploaded')
   .ext('pdf')
@@ -119,20 +171,9 @@ app.get('/apply',(req,res)=>{
  
   files.then((files)=>{
     console.log(files);
-   // res.header("Access-Control-Allow-Origin", "*");
-   // res.header("Access-Control-Allow-Headers", "X-Requested-With");
-   // res.header('content-type', 'application/pdf');
-   //var Path = files[0];
+
    res.send(files);
 
-   // var file = fs.createReadStream(files[0]);
-   // var stat = fs.statSync(files[0]);
-   // res.setHeader('Content-Length', stat.size);
-   // res.setHeader('Content-Type', 'application/pdf');
-   // res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
-   // file.pipe(res);
-   // res.send(file);
-   //res.json({'message': 'File found'});
   },(e)=>{
     console.log(e);
     res.json({'error':'No File Found'})
@@ -140,52 +181,55 @@ app.get('/apply',(req,res)=>{
   
 })
 
-app.post('/sendemail', (request, response, next) => {
+app.post('/sendemail', async (request, response, next) => {
 
   var body = _.pick(request.body, ['email', 'password'])
   var To =  _.pick(request.body,'to');
+  var resfile = _.pick(request.body,['file']);
+  console.log(resfile);
+  try
+  {
+    const user = await User.findByCredentials(body.email, body.password);
+    if(user)
+    {
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: user.email,
+          pass: body.password,
+          host: 'smtp.gmail.com',
+          ssl: false
+        }
+      });
+      var mailOptions = {
+        from: body.email,
+        to: body.email, //get from form input field of html file
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+      };
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+         throw new Error();
   
-  console.log(To);
-
-  User.findByCredentials(body.email, body.password).then((user) => {
-   // console.log(user.password);
-
-    var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: user.email,
-        pass: body.password,
-        host: 'smtp.gmail.com',
-        ssl: false
-      }
-    });
-    var mailOptions = {
-      from: body.email,
-      to: body.email, //get from form input field of html file
-      subject: 'Sending Email using Node.js',
-      text: 'That was easy!'
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-        response.status(401).send()
-
-      } else {
-
-        response.send({
-          'message': 'You have applied succesfully'
-        });
-
-        console.log('success');
-
-       // response.json()
-      }
-    });
-  },(e)=>{
-    response.status(401).send(e)
-
-  });
-
+        } else {
+  
+          response.send({
+            'message': 'You have applied succesfully'
+          });
+        }
+      });
+    }
+    else
+    {
+      throw new Error();
+    }
+    
+  }
+  catch(e)
+  {
+    response.status(401).send();
+  }
+ 
 });
 
 

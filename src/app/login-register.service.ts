@@ -22,7 +22,7 @@ export class LoginRegisterService implements CanActivate {
     //https://immense-earth-64169.herokuapp.com
     //http://localhost:3000
    return this._http
-     .post("https://immense-earth-64169.herokuapp.com/register",user)
+     .post('https://immense-earth-64169.herokuapp.com/register',user)
     .pipe(map(data => {
       this.router.navigateByUrl('/login');
       return data;
@@ -35,7 +35,7 @@ export class LoginRegisterService implements CanActivate {
     //https://immense-earth-64169.herokuapp.com
     //http://localhost:3000
    return this._http
-     .post("https://immense-earth-64169.herokuapp.com/login-email",{
+     .post('https://immense-earth-64169.herokuapp.com/login-email',{
       email:user.email,
       password:user.password
      })

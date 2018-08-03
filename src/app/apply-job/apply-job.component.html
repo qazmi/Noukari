@@ -20,27 +20,52 @@
   </div>
   <div class="col-sm-6">
     <div class="jumbotron jumbotron-fluid">
-      <div class="container">
 
-        <h3>Use Exsisting.</h3>
 
-        <div>
-        <ul class="list-group">
-          <li class="list-group-item active">CV1</li>
-          <li class="list-group-item">Cv2</li>
+      <h3>Use Exsisting.</h3>
 
-        </ul>
+      <div ngbDropdown class="d-inline-block" *ngIf ="allResumesfetched">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Choose Resume</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1"   *ngFor = "let file of allResumes.files" >
+            <!--"(click) ="  " setSelectedFile(file)" -->
+          <button class="dropdown-item" (click)="setSelectedFile(file)">{{file}} </button>
+         
         </div>
+
         <div>
-        <a class="btn-floating peach-gradient mt-0 float-left">
-            <button class="btn btn-primary mb-2 "  (click)="applyForJob()">Apply</button>
+          <a class="peach-gradient">
+            <button class="btn btn-primary mb-2 " (click)="applyForJob()">Apply</button>
+           
           </a>
         </div>
-        <div>
-            <a class="btn btn-success waves-light" *ngIf = "emailSent"  mdbWavesEffect>Success message</a>
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="row" *ngIf="emailSent">
+    <div class="col-sm-6">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h3>Search More jobs</h3>
+          <button (click)="goBack()">Go Back</button>
         </div>
-        
-   
-        <a class="btn btn-danger waves-light" *ngIf = "!emailSent" mdbWavesEffect>Error message</a>
       </div>
     </div>
+    <div class="col-sm-6" *ngIf="(emailSent && !error);else failed">
+      <p>
+        <ngb-alert type="success" (close)="closeAlert()">{{applyResults }}</ngb-alert>
+
+      </p>
+    </div>
+    <ng-template #failed>
+      <div class="col-sm-6">
+        <p>
+          <ngb-alert type="danger" (close)="closeAlert()">{{applyResults }}</ngb-alert>
+
+        </p>
+      </div>
+    </ng-template>
+  </div>
